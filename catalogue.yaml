@@ -57,12 +57,12 @@
       name: mongodb-org-shell
       state: present
 
-  # - name: get the catagories count
-  #   ansible.builtin.command: mongo --host mongodb.daws76s.online --quiet --eval 'db = db.getSiblingDB("catalogue"); db.products.count()'
+  - name: get the catagories count
+    ansible.builtin.command: mongo --host mongodb.daws76s.online --quiet --eval 'db = db.getSiblingDB("catalogue"); db.products.count()'
 
-  - name: print the count
-    ansible.builtin.debug:
-       msg: "product count: {{product_count}}"
+  # - name: print the count
+  #   ansible.builtin.debug:
+  #      msg: "product count: {{product_count}}"
 
   - name: load catalogue data
     ansible.builtin.command: mongo --host mongodb.daws76s.online < /app/schema/catalogue.js
