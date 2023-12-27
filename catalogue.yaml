@@ -3,7 +3,7 @@
   become: true
   tasks:
   - name:  Disable old nodejs and Enable nodejs-18
-    ansible.builtin.command: dnf module disable nodejs -y ; dnf module enable nodejs:18 -y
+    ansible.builtin.shell: dnf module disable nodejs -y ; dnf module enable nodejs:18 -y
   
   - name: Install nodejs
     ansible.builtin.dnf:
