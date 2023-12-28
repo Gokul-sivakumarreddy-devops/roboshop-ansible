@@ -26,7 +26,7 @@
     
   - name: Download application to app directory
     ansible.builtin.get_url:
-      url: https://roboshop-builds.s3.amazonaws.com/catalogue.zip
+      url: https://roboshop-builds.s3.amazonaws.com/user.zip
       dest: /tmp
 
   - name: Extract user application
@@ -44,7 +44,7 @@
   - name: Copy user service
     ansible.builtin.copy:
       src: user.service 
-      dest: /etc/systemd/system/catalogue.service
+      dest: /etc/systemd/system/user.service
 
   - name: Daemon reload and start service
     ansible.builtin.systemd_service:
