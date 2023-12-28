@@ -25,7 +25,7 @@
   - name: Extract Catalogue application
     ansible.builtin.unarchive:
       src: /tmp/web.zip
-      dest: usr/share/nginx/html
+      dest: /usr/share/nginx/html
       remote_src: yes      # because file is already available in remote server
 
   - name: Copy web service
