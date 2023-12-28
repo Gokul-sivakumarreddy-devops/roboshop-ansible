@@ -4,7 +4,7 @@
   tasks:
   - name: Installing Maven
     ansible.builtin.dnf:
-      name: git
+      name: maven
       state: present
 
   - name: Creating app directory
