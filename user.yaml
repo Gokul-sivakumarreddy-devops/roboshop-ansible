@@ -1,5 +1,5 @@
-- name: catalogue
-  hosts: catalogue
+- name: user component
+  hosts: user
   become: true
   tasks:
   - name:  Disable old nodejs and Enable nodejs-18
@@ -29,9 +29,9 @@
       url: https://roboshop-builds.s3.amazonaws.com/catalogue.zip
       dest: /tmp
 
-  - name: Extract Catalogue application
+  - name: Extract user application
     ansible.builtin.unarchive:
-      src: /tmp/catalogue.zip
+      src: /tmp/user.zip
       dest: /app
       remote_src: yes
   
@@ -41,9 +41,9 @@
       chdir: /app
       
 
-  - name: Copy Catalogue service
+  - name: Copy user service
     ansible.builtin.copy:
-      src: catalogue.service 
+      src: user.service 
       dest: /etc/systemd/system/catalogue.service
 
   - name: Daemon reload and start service
@@ -63,19 +63,19 @@
       state: present
 
   - name: get the categories count
-    ansible.builtin.command:  mongo --host mongodb.practiceazure.com --quiet --eval 'db = db.getSiblingDB("catalogue"); db.products.count()'
-    register: product_count
+    ansible.builtin.command:  mongo --host mongodb.practiceazure.com --quiet --eval 'db = db.getSiblingDB("users"); db.users.count()'
+    register: user_count
 
   - name: print the count
     ansible.builtin.debug:
-       msg: "product count: {{product_count}}"
+       msg: "product count: {{user_count}}"
 
   - name: load catalogue data
-    ansible.builtin.command: mongo --host mongodb.practiceazure.com < /app/schema/catalogue.js
+    ansible.builtin.command: mongo --host mongodb.practiceazure.com < /app/schema/user.js
     when: product_count.stdout == "0"
     
-  - name: start and enable catalogue
+  - name: start and enable user
     ansible.builtin.service:
-      name: catalogue
+      name: user
       state: restarted
       enabled: yes
