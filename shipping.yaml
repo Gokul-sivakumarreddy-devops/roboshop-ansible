@@ -9,6 +9,10 @@
       name: maven
       state: present
 
+  - name: Create roboshop User
+    ansible.builtin.user:
+      name: roboshop   
+
   - name: Creating app directory
     ansible.builtin.file:
       path: /app
