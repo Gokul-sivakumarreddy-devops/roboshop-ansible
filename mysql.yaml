@@ -1,5 +1,5 @@
 - name: My sql component
-  hosts: msql
+  hosts: mysql
   become: true
   tasks:
   - name: disable current mysql
